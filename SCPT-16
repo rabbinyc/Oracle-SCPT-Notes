@@ -1,0 +1,16 @@
+SCPT 16: Oracle Java Pool, Large Pool, streams pool
+what is Large pool
+Shared Pool
+Allocal
+Mllocal
+Large Pool has the following 3 conditions
+1.UGA in a shared servier mode
+2.Back RMAN disk I/O
+3.Parallal Buffer
+
+PL/SQL procedure
+Java Stored procedure
+parameter java_pool_size will determine size of java pool
+database replication (need a tool called streams)
+Stream pool is used for DB streaming/replication purpose
+Oracle 10G and 11G, you automatically sate memory for SGA_Target
