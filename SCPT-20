@@ -1,0 +1,17 @@
+
+
+
+SCPT-20 Oracle Back Ground Processes (PMON, SMON, RECO) 
+Process Monitor (PMON): If a background process fails, the PMON process performs the cleanup operations by performing the following tasks:
+Performs recovery, when user process fails
+• Rolls back the user’s current transaction
+• Releases all the locks that are held on tables or rows
+• Frees other resources used by the users
+• Restarts the dead dispatcher
+
+System Monitor (SMON): If an Oracle instance crashes, any changes that are made in the SGA are not written to the data files. When you restart the instance, the SMON background process automatically performs instance recovery by performing the following tasks:
+Performs recovery, when instance fails
+• Rolling forward changes that are made in the online redo log files but not in the data files. Since all the committed transactions are written to the online redo log files, these are successfully recovered as result of rolling forward changes from the online redo log files to the data files.
+• Opening the database. After the database is opened, users can log on and access any data that is not locked by un-recovered transaction.
+• Rolling back all the uncommitted transactions.
+•	It coalesces free spaces, it put together all the free extents sitting around and put together and make a bigger extent
