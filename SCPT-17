@@ -14,3 +14,42 @@ in 11g, memory_target =900 mb will set PGA and SGA automitacally calculated
 and resizable element of SGA can be dynamically allocate to different
 value based of the workload
 in 10g, you need to set PAG_TARGET and SGA_TRAGET, SGA_MAX_target
+
+Enabling Automatic Memory Management
+To enable automatic memory management
+1. Start SQL*Plus and connect to the database as SYSDBA.
+
+2. Calculate the minimum value for MEMORY_TARGET as follows:
+ a. Determine the current sizes of SGA_TARGET and PGA_AGGREGATE_TARGET by entering the following SQL*Plus command:
+SHOW PARAMETER TARGET
+b.Run the following query to determine the maximum instance PGA allocated since the database was started:
+select value from v$pgastat where name='maximum PGA allocated';
+c. Compute the maximum value between the query result from step 2b and PGA_AGGREGATE_TARGET. Add SGA_TARGET to this value.
+memory_target = sga_target + max(pga_aggregate_target, maximum PGA allocated)
+
+3. Choose the value for MEMORY_TARGET that you want to use.
+
+4. For the MEMORY_MAX_TARGET initialization parameter, decide on a maximum amount of memory that you would want to allocate to the database for the foreseeable future
+
+5. Do one of the following:
+
+If you started your Oracle Database instance with a server parameter file, which is the default if you created the database with the Database Configuration Assistant (DBCA), enter the following command:
+
+ALTER SYSTEM SET MEMORY_MAX_TARGET = nM SCOPE = SPFILE;
+where n is the value that you computed in Step 4.
+
+The SCOPE = SPFILE clause sets the value only in the server parameter file, and not for the running instance. You must include this SCOPE clause because MEMORY_MAX_TARGET is not a dynamic initialization parameter.
+
+If you started your instance with a text initialization parameter file, manually edit the file so that it contains the following statements:
+
+memory_max_target = nM
+memory_target = mM
+
+6. Shut down and restart the database.
+
+7. If you started your Oracle Database instance with a server parameter file, enter the following commands:
+
+ALTER SYSTEM SET MEMORY_TARGET = nM;
+ALTER SYSTEM SET SGA_TARGET = 0;
+ALTER SYSTEM SET PGA_AGGREGATE_TARGET = 0;
+
