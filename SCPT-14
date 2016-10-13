@@ -1,0 +1,23 @@
+SCPT-14
+db buffer cache
+inside RAM > SGA > db buffer cache 
+db block 
+cache hit > getting data from buffer cache/RAM (faster) instead of data file/File system
+there should be a way to keep blocks in buffer cache and release fron buffer cache
+management of block buffer cache
+Most Recently Used (MRU)
+List Recently Used (LRU) /LRU Algorithm
+keep the popular blocks
+release less/not popular blocks
+modified LRU algorithm - if you do a full table scan of a big table, oracle will take limited data from DB file
+and keep them in LRU end of the list
+Touch count algorithm
+Hot list
+cold list
+indix scan ranse
+LRU list
+db_aging_touchtime
+keep pool
+Recycle pool
+db_block_size
+create multiple db block sizes
