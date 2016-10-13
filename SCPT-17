@@ -1,0 +1,16 @@
+SCPT 17: Tools to Manage Oracle's Memory Structure
+Memory management
+1. Manual
+2. Automatic
+db_buffer_cache parameter determines how big your DB Buffer Cache
+log_buffer parameter determines how big is your big your reso buffer cache
+java_pool determined how big your java pool
+large_pool determined how big your large pool
+instead of individually assigning memory, set memory for SGA 
+SGA_TARGET parameter will set memory for all SGA components
+Redo Buffer Cache is not resizable
+buffer_cache = 200 mb
+in 11g, memory_target =900 mb will set PGA and SGA automitacally calculated
+and resizable element of SGA can be dynamically allocate to different
+value based of the workload
+in 10g, you need to set PAG_TARGET and SGA_TRAGET, SGA_MAX_target
